@@ -1,9 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.HashMap;
 
 class RushHour {
     public static void main(String[] args) {
+        HashMap<String, String> visitedPos = new HashMap<String, String>();
+        //check if there is a key visitedPos.containsKey(stringof position);
+        //inserts a key visitedPos.put(stringof position, stringof position)
         String[][] map = new String[6][6];
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 6; j++){

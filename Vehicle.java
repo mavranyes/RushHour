@@ -22,7 +22,6 @@ public class Vehicle {
     //Populate map
     public void populateMap(String[][] map) {
         //Probably add checks later on
-        System.err.println(color);
         if(dir.equals("h")) {
             for(int i = 0; i < length; i++) {
                 map[yPos][xPos + i] = String.valueOf(place);
@@ -35,6 +34,44 @@ public class Vehicle {
         }
     }
 
+    public void findMoves(String[][] map) {
+        if(dir.equals("h")) {
+            for(int i = 0; (i + xPos) < 6; i++) {
+                if (map[yPos][xPos + length + i].equals(" ")) {
+                    //add to possible list
+                }
+                else {
+                    break;
+                }
+            }
+            for(int i = 0; (i + xPos) > 0; i--) {
+                if (map[yPos][xPos - i - 1].equals(" ")) {
+                    //add to possible list
+                }
+                else {
+                    break;
+                }
+            }
+        }
+        else {
+            for(int i = 0; (i + yPos) < 6; i++) {
+                if (map[yPos + length + i][xPos].equals(" ")) {
+                    //add to possible list
+                }
+                else {
+                    break;
+                }
+            }
+            for(int i = 0; (i + yPos) > 0; i--) {
+                if (map[yPos - i - 1][xPos].equals(" ")) {
+                    //add to possible list
+                }
+                else {
+                    break;
+                }
+            }
+        }
+    }
 
     //Getters
     public String getType() {
