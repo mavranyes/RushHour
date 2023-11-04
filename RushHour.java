@@ -12,7 +12,6 @@ class RushHour {
                 map[i][j] = ' ';
             }
         }
-        printMap(map);
     }
 
     private static void parseInput(char[][] map) {
@@ -48,7 +47,13 @@ class RushHour {
         }
     }
 
-    private static void convertMaptoString() {
-
+    private static String convertMaptoString(char[][] map) {
+        String check = "";
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 6; j++){
+                check += map[i][j];
+            }
+        }
+        return check;
     }
 }
