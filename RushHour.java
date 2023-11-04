@@ -12,6 +12,8 @@ class RushHour {
                 map[i][j] = ' ';
             }
         }
+        parseInput(map);
+        printMap(map);
     }
 
     private static void parseInput(String[][] map) {
