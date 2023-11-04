@@ -14,8 +14,8 @@ public class Vehicle {
         setType(type);
         setColor(color);
         setDir(dir);
-        setxPos(xPos);
-        setyPos(yPos);
+        setxPos(xPos - 1);
+        setyPos(yPos - 1);
         setPlace(place);
     }
 
@@ -25,12 +25,12 @@ public class Vehicle {
         System.err.println(color);
         if(dir.equals("h")) {
             for(int i = 0; i < length; i++) {
-                map[xPos - i][yPos] = String.valueOf(place);
+                map[yPos][xPos + i] = String.valueOf(place);
             }
         }
         else {
             for(int i = 0; i < length; i++) {
-                map[xPos][yPos - i] = String.valueOf(place);
+                map[yPos + i][xPos] = String.valueOf(place);
             }
         }
     }

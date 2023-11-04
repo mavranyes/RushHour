@@ -23,8 +23,8 @@ class RushHour {
                 String type = scan.nextLine();
                 String color = scan.nextLine();
                 String dir = scan.nextLine();
-                int xPos = Integer.parseInt(scan.nextLine());
                 int yPos = Integer.parseInt(scan.nextLine());
+                int xPos = Integer.parseInt(scan.nextLine());
                 Vehicle v = new Vehicle(type, color, dir, xPos, yPos, i);
                 v.populateMap(map);
                 printMap(map);
