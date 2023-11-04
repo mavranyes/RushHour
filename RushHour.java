@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 class RushHour {
     public static void main(String[] args) {
-        System.out.println("hello");
-
         String[][] map = new String[6][6];
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 6; j++){

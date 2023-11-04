@@ -22,7 +22,8 @@ public class Vehicle {
     //Populate map
     public void populateMap(String[][] map) {
         //Probably add checks later on
-        if(dir == "h") {
+        System.err.println(color);
+        if(dir.equals("h")) {
             for(int i = 0; i < length; i++) {
                 map[xPos - i][yPos] = String.valueOf(place);
             }
@@ -59,7 +60,7 @@ public class Vehicle {
     //Setters
     private void setType(String type) {
         this.type = type;
-        if (type == "truck") {
+        if (type.equals("truck")) {
             length = 3;
         }
         else {
@@ -84,7 +85,7 @@ public class Vehicle {
     }
 
     private void setPlace(int place) {
-        if(color == "red") {
+        if(color.equals("red")) {
             this.place = "R";
         }
         else {
