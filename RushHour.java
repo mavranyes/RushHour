@@ -35,7 +35,7 @@ class RushHour {
         }
     }
 
-    private static void printMap(char[][] map) {
+    private static void printMap(String[][] map) {
         System.out.println("Rush Hour Current Representation: \n");
         System.out.println(" -------------");
         for(int i = 5; i >= 0; i--){
@@ -47,7 +47,7 @@ class RushHour {
         }
     }
 
-    private static String convertMaptoString(char[][] map) {
+    private static String convertMaptoString(String[][] map) {
         String check = "";
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 6; j++){
