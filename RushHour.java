@@ -2,9 +2,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.HashMap;
+import java.util.Vector;
 
 class RushHour {
     public static void main(String[] args) {
+        Vector<Vehicle> vehicles = new Vector<Vehicle>();
         HashMap<String, String> visitedPos = new HashMap<String, String>();
         //check if there is a key visitedPos.containsKey(stringof position);
         //inserts a key visitedPos.put(stringof position, stringof position)
@@ -14,11 +16,11 @@ class RushHour {
                 map[i][j] = " ";
             }
         }
-        parseInput(map);
+        parseInput(map, vehicles);
         printMap(map);
     }
 
-    private static void parseInput(String[][] map) {
+    private static void parseInput(String[][] map, Vector<Vehicle> vehicles) {
         try{
             File file = new File("input.txt");
             Scanner scan = new Scanner(file);
@@ -31,8 +33,9 @@ class RushHour {
                 int xPos = Integer.parseInt(scan.nextLine());
                 Vehicle v = new Vehicle(type, color, dir, xPos, yPos, i);
                 v.populateMap(map);
-                printMap(map);
-                v.findMoves(map);
+                // printMap(map);
+                // v.findMoves(map);
+                vehicles.addElement(v);
             }
             scan.close();
         }
