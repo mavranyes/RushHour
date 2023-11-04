@@ -36,17 +36,17 @@ public class Vehicle {
 
     public void findMoves(String[][] map) {
         if(dir.equals("h")) {
-            for(int i = 0; (i + xPos) < 6; i++) {
+            for(int i = 0; (i + xPos + length) < 6; i++) {
                 if (map[yPos][xPos + length + i].equals(" ")) {
-                    //add to possible list
+                    System.out.println("X: " + (xPos + length + i) + " Y: " + yPos);
                 }
                 else {
                     break;
                 }
             }
-            for(int i = 0; (i + xPos) > 0; i--) {
+            for(int i = 0; (xPos - i) > 0; i++) {
                 if (map[yPos][xPos - i - 1].equals(" ")) {
-                    //add to possible list
+                    System.out.println("X: " + (xPos - i - 1) + " Y: " + yPos);
                 }
                 else {
                     break;
@@ -54,17 +54,17 @@ public class Vehicle {
             }
         }
         else {
-            for(int i = 0; (i + yPos) < 6; i++) {
+            for(int i = 0; (i + yPos + length) < 6; i++) {
                 if (map[yPos + length + i][xPos].equals(" ")) {
-                    //add to possible list
+                    System.out.println("X: " + xPos + " Y: " + (yPos + length + i));
                 }
                 else {
                     break;
                 }
             }
-            for(int i = 0; (i + yPos) > 0; i--) {
+            for(int i = 0; (yPos - i) > 0; i++) {
                 if (map[yPos - i - 1][xPos].equals(" ")) {
-                    //add to possible list
+                    System.out.println("X: " + xPos + " Y: " + (yPos - i - 1));
                 }
                 else {
                     break;

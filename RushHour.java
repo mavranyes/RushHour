@@ -32,6 +32,7 @@ class RushHour {
                 Vehicle v = new Vehicle(type, color, dir, xPos, yPos, i);
                 v.populateMap(map);
                 printMap(map);
+                v.findMoves(map);
             }
             scan.close();
         }
