@@ -6,10 +6,10 @@ class RushHour {
     public static void main(String[] args) {
         System.out.println("hello");
 
-        char[][] map = new char[6][6];
+        String[][] map = new String[6][6];
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 6; j++){
-                map[i][j] = ' ';
+                map[i][j] = " ";
             }
         }
         parseInput(map);
