@@ -14,8 +14,7 @@ class RushHour {
         }
     }
 
-    private static void parseInput(char[][] map) {
-        String temp = "";
+    private static void parseInput(String[][] map) {
         try{
             File file = new File("input.txt");
             Scanner scan = new Scanner(file);
@@ -26,8 +25,9 @@ class RushHour {
                 String dir = scan.nextLine();
                 int xPos = Integer.parseInt(scan.nextLine());
                 int yPos = Integer.parseInt(scan.nextLine());
+                Vehicle v = new Vehicle(type, color, dir, xPos, yPos, i);
+                v.populateMap(map);
             }
-            
             scan.close();
         }
         catch(FileNotFoundException e) {

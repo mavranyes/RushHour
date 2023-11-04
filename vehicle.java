@@ -1,7 +1,7 @@
 /**
  * vehicle
  */
-public class vehicle {
+public class Vehicle {
     private String type;
     private String color;
     private String dir;
@@ -10,7 +10,7 @@ public class vehicle {
     private int length;
     private String place;
 
-    public vehicle(String type, String color, String dir, int xPos, int yPos, int place) {
+    public Vehicle(String type, String color, String dir, int xPos, int yPos, int place) {
         setType(type);
         setColor(color);
         setDir(dir);
