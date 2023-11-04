@@ -8,20 +8,30 @@ public class vehicle {
     private int xPos;
     private int yPos;
     private int length;
+    private String place;
 
-    public vehicle(String type, String color, String dir, int xPos, int yPos) {
+    public vehicle(String type, String color, String dir, int xPos, int yPos, int place) {
         setType(type);
         setColor(color);
         setDir(dir);
         setxPos(xPos);
         setyPos(yPos);
-
+        setPlace(place);
     }
 
     //Populate map
     public void populateMap(String[][] map) {
         //Probably add checks later on
-        
+        if(dir == "h") {
+            for(int i = 0; i < length; i++) {
+                map[xPos - i][yPos] = String.valueOf(place);
+            }
+        }
+        else {
+            for(int i = 0; i < length; i++) {
+                map[xPos][yPos - i] = String.valueOf(place);
+            }
+        }
     }
 
 
@@ -71,5 +81,14 @@ public class vehicle {
 
     private void setyPos(int yPos) {
         this.yPos = yPos;
+    }
+
+    private void setPlace(int place) {
+        if(color == "red") {
+            this.place = "R";
+        }
+        else {
+            this.place = String.valueOf(place);
+        }
     }
 }
