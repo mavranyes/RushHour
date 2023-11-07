@@ -2,14 +2,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 import java.util.Vector;
 
 class RushHour {
     public static void main(String[] args) {
+        PriorityQueue<PositionNode> locations = new PriorityQueue<>();
         Vector<Vehicle> vehicles = new Vector<Vehicle>();
         HashMap<String, String> visitedPos = new HashMap<String, String>();
-        //check if there is a key visitedPos.containsKey(stringof position);
-        //inserts a key visitedPos.put(stringof position, stringof position)
+
         String[][] map = new String[6][6];
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 6; j++){
@@ -18,6 +19,17 @@ class RushHour {
         }
         parseInput(map, vehicles);
         printMap(map);
+
+        //Adds to the hash map
+        String currentPosition = convertMaptoString(map);
+        visitedPos.put(currentPosition, currentPosition);
+        //Checks if it contains this string
+        System.out.println(visitedPos.containsKey(currentPosition));
+
+        while(!locations.isEmpty()) {
+            //find adj
+            
+        }
     }
 
     private static void parseInput(String[][] map, Vector<Vehicle> vehicles) {
