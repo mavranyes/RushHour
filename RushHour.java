@@ -22,6 +22,7 @@ class RushHour {
 
         //Adds to the hash map
         String currentPosition = convertMaptoString(map);
+        System.out.println(currentPosition);
         visitedPos.put(currentPosition, currentPosition);
         //Checks if it contains this string
         System.out.println(visitedPos.containsKey(currentPosition));
