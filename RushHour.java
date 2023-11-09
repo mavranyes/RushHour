@@ -26,7 +26,7 @@ class RushHour {
         visitedPos.put(currentPosition, currentPosition);
         //Checks if it contains this string
         //System.out.println(visitedPos.containsKey(currentPosition));
-        findMoves(vehicles.elementAt(1), 0, currentPosition, vehicles, locationsQue);
+        findMoves(vehicles.elementAt(3), 24, currentPosition, vehicles, locationsQue);
         while(!locationsQue.isEmpty()) {
             locationsQue.poll();
             
@@ -53,7 +53,7 @@ class RushHour {
         }
         //System.out.println(line);
         //Iterate till collision, adding each valid space to queue
-        for(int i = startPos + length + 1; i < 6; i++) {
+        for(int i = startPos + length; i < 6; i++) {
             if (line.charAt(i) == ' ') {
                 System.out.println("pos:" + i);
             }
