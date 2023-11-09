@@ -26,7 +26,7 @@ class RushHour {
         visitedPos.put(currentPosition, currentPosition);
         //Checks if it contains this string
         System.out.println(visitedPos.containsKey(currentPosition));
-        
+        findMoves(vehicles.elementAt(2), 6, currentPosition, vehicles, locationsQue);
         while(!locationsQue.isEmpty()) {
             locationsQue.poll();
             
@@ -35,14 +35,19 @@ class RushHour {
 
     private static void findMoves(Vehicle v, int pos, String mapString, Vector<Vehicle> vehicles, PriorityQueue<PositionNode> locationsQue) {
         //Isolate line
-        String line;
-        if(v.getType().equals("h")) {
+        String line = "";
+        int startPos;
+        if(v.getDir().equals("h")) {
             int nPos = (int) Math.floor(pos/6);
-            line = mapString.substring(nPos * 6, (nPos + 1) * 6 - 1);
+            line = mapString.substring(nPos * 6, (nPos + 1) * 6);
         }
         else {
-            //line = ???
+            int nPos = pos % 6;
+            for(int i = 0; i < 6; i++) {
+                line += mapString.charAt(nPos + (i * 6));
+            }
         }
+        //System.out.println(line);
         //Iterate till collision, adding each valid space to queue
         for(int i = 0; (i + xPos + length) < 6; i++) {
             if (map[yPos][xPos + length + i].equals(" ")) {
