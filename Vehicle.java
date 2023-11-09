@@ -1,3 +1,4 @@
+import java.util.PriorityQueue;
 /**
  * vehicle
  */
@@ -34,7 +35,7 @@ public class Vehicle {
         }
     }
 
-    public void findMoves(String[][] map) {
+    public void findMoves(String[][] map, PriorityQueue<PositionNode> locationsQue) {
         if(dir.equals("h")) {
             for(int i = 0; (i + xPos + length) < 6; i++) {
                 if (map[yPos][xPos + length + i].equals(" ")) {

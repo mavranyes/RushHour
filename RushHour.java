@@ -7,7 +7,7 @@ import java.util.Vector;
 
 class RushHour {
     public static void main(String[] args) {
-        PriorityQueue<PositionNode> locations = new PriorityQueue<>();
+        PriorityQueue<PositionNode> locationsQue = new PriorityQueue<>();
         Vector<Vehicle> vehicles = new Vector<Vehicle>();
         HashMap<String, String> visitedPos = new HashMap<String, String>();
 
@@ -27,8 +27,8 @@ class RushHour {
         //Checks if it contains this string
         System.out.println(visitedPos.containsKey(currentPosition));
 
-        while(!locations.isEmpty()) {
-            //find adj
+        while(!locationsQue.isEmpty()) {
+            locationsQue.poll();
             
         }
     }

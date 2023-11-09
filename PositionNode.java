@@ -2,11 +2,13 @@ public class PositionNode {
     private String position;
     private int distance;
     private PositionNode parent;
+    private String move;
     
-    public PositionNode(String position) {
+    public PositionNode(String position, PositionNode parentNode, String move) {
         this.position = position;
-        distance = Integer.MAX_VALUE;
-        parent = null;
+        this.move = move;
+        setParent(parentNode);
+        distance = parent.getDistance() + 1;
     }
 
     //Getters
@@ -20,6 +22,10 @@ public class PositionNode {
 
     public PositionNode getParent() {
         return parent;
+    }
+
+    public String getMove() {
+        return move;
     }
 
     //Setters
