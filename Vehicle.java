@@ -94,6 +94,10 @@ public class Vehicle {
     public int getyPos() {
         return yPos;
     }
+    
+    public String getPlace() {
+        return place;
+    }
 
     //Setters
     private void setType(String type) {

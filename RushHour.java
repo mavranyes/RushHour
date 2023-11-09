@@ -18,7 +18,7 @@ class RushHour {
             }
         }
         parseInput(map, vehicles);
-        printMap(map);
+        //printMap(map);
 
         //Adds to the hash map
         String currentPosition = convertMaptoString(map);
@@ -27,7 +27,7 @@ class RushHour {
         //Checks if it contains this string
         System.out.println(visitedPos.containsKey(currentPosition));
 
-        System.out.println(vehicles.get(0).getColor());
+        //System.out.println(vehicles.get(3).getPlace());
 
         while(!locationsQue.isEmpty()) {
             locationsQue.poll();
@@ -59,6 +59,9 @@ class RushHour {
         }
     }
 
+    /*
+     * Print out a visual representation of the board
+     */
     private static void printMap(String[][] map) {
         System.out.println("Rush Hour Current Representation: \n");
         System.out.println(" -------------");
@@ -71,6 +74,9 @@ class RushHour {
         }
     }
 
+    /*
+     * Convert the map object to a string where vehicle objects are represented as characters
+     */
     private static String convertMaptoString(String[][] map) {
         String check = "";
         for(int i = 0; i < 6; i++){
@@ -81,14 +87,21 @@ class RushHour {
         return check;
     }
 
-    private static void findCars(String currentPosition){
+    /*
+     * This method scans a string representation of the board and passes each vehicle+position to findNext
+     */
+    private static void findCars(String currentPosition, Vector<Vehicle> vehicles){
         String v = "";
         for(int i = 0; i < currentPosition.length(); i++){
             int pos = v.indexOf(currentPosition.charAt(i));
             if(pos == -1) { 
                 break; 
             }
-            //findMoves()
+            int vindex = 0;
+            if(currentPosition.charAt(i) != 'R'){
+                vindex = (int) currentPosition.charAt(i);
+            }
+            //findNext(vehicles.get(vindex), pos);
         }
     }
 
