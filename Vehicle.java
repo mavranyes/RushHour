@@ -99,6 +99,10 @@ public class Vehicle {
         return place;
     }
 
+    public int getLength() {
+        return length;
+    }
+
     //Setters
     private void setType(String type) {
         this.type = type;

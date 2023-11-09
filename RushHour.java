@@ -22,11 +22,11 @@ class RushHour {
 
         //Adds to the hash map
         String currentPosition = convertMaptoString(map);
-        System.out.println(currentPosition);
+        //System.out.println(currentPosition);
         visitedPos.put(currentPosition, currentPosition);
         //Checks if it contains this string
-        System.out.println(visitedPos.containsKey(currentPosition));
-        findMoves(vehicles.elementAt(2), 6, currentPosition, vehicles, locationsQue);
+        //System.out.println(visitedPos.containsKey(currentPosition));
+        findMoves(vehicles.elementAt(6), 32, currentPosition, vehicles, locationsQue);
         while(!locationsQue.isEmpty()) {
             locationsQue.poll();
             
@@ -37,29 +37,33 @@ class RushHour {
         //Isolate line
         String line = "";
         int startPos;
+        int length = v.getLength();
+        int nPos;
         if(v.getDir().equals("h")) {
-            int nPos = (int) Math.floor(pos/6);
+            nPos = (int) Math.floor(pos/6);
             line = mapString.substring(nPos * 6, (nPos + 1) * 6);
+            startPos = pos % 6;
         }
         else {
-            int nPos = pos % 6;
+            nPos = pos % 6;
             for(int i = 0; i < 6; i++) {
                 line += mapString.charAt(nPos + (i * 6));
             }
+            startPos = (int) Math.floor(pos/6);
         }
         //System.out.println(line);
         //Iterate till collision, adding each valid space to queue
-        for(int i = 0; (i + xPos + length) < 6; i++) {
-            if (map[yPos][xPos + length + i].equals(" ")) {
-                System.out.println("X: " + (xPos + length + i) + " Y: " + yPos);
+        for(int i = startPos + length; i < 6; i++) {
+            if (line.charAt(i) == ' ') {
+                System.out.println("pos:" + i);
             }
             else {
                 break;
             }
         }
-        for(int i = 1; (xPos - i) > 0; i++) {
-            if (map[yPos][xPos - i].equals(" ")) {
-                System.out.println("X: " + (xPos - i - 1) + " Y: " + yPos);
+        for(int i = startPos - 1; i > 0; i--) {
+            if (line.charAt(i) == ' ') {
+                System.out.println("pos:" + i);
             }
             else {
                 break;
