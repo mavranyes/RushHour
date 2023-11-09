@@ -26,39 +26,12 @@ class RushHour {
         visitedPos.put(currentPosition, currentPosition);
         //Checks if it contains this string
         System.out.println(visitedPos.containsKey(currentPosition));
-        
+
+        System.out.println(vehicles.get(0).getColor());
+
         while(!locationsQue.isEmpty()) {
             locationsQue.poll();
             
-        }
-    }
-
-    private static void findMoves(Vehicle v, int pos, String mapString, Vector<Vehicle> vehicles, PriorityQueue<PositionNode> locationsQue) {
-        //Isolate line
-        String line;
-        if(v.getType().equals("h")) {
-            int nPos = (int) Math.floor(pos/6);
-            line = mapString.substring(nPos * 6, (nPos + 1) * 6 - 1);
-        }
-        else {
-            //line = ???
-        }
-        //Iterate till collision, adding each valid space to queue
-        for(int i = 0; (i + xPos + length) < 6; i++) {
-            if (map[yPos][xPos + length + i].equals(" ")) {
-                System.out.println("X: " + (xPos + length + i) + " Y: " + yPos);
-            }
-            else {
-                break;
-            }
-        }
-        for(int i = 1; (xPos - i) > 0; i++) {
-            if (map[yPos][xPos - i].equals(" ")) {
-                System.out.println("X: " + (xPos - i - 1) + " Y: " + yPos);
-            }
-            else {
-                break;
-            }
         }
     }
 
@@ -107,4 +80,16 @@ class RushHour {
         }
         return check;
     }
+
+    private static void findCars(String currentPosition){
+        String v = "";
+        for(int i = 0; i < currentPosition.length(); i++){
+            int pos = v.indexOf(currentPosition.charAt(i));
+            if(pos == -1) { 
+                break; 
+            }
+            //findMoves()
+        }
+    }
+
 }
