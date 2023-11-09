@@ -112,4 +112,25 @@ class RushHour {
         }
         return check;
     }
+
+    /*
+     * This method scans a string representation of the board and passes each vehicle+position to findNext
+     */
+    private static void findCars(String currentPosition, Vector<Vehicle> vehicles, PriorityQueue<PositionNode> locationsQue){
+        PriorityQueue<PositionNode> q = locationsQue;
+        String v = "";
+        for(int i = 0; i < currentPosition.length(); i++){
+            int pos = v.indexOf(currentPosition.charAt(i));
+            if(pos == -1) { 
+                break; 
+            }
+            //findMoves()
+            int vindex = 0;
+            if(currentPosition.charAt(i) != 'R'){
+                vindex = (int) currentPosition.charAt(i);
+            }
+            findMoves(vehicles.get(vindex), pos, currentPosition, vehicles, q);
+        }
+    }
+
 }
