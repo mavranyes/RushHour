@@ -33,6 +33,35 @@ class RushHour {
         }
     }
 
+    private static void findMoves(Vehicle v, int pos, String mapString, Vector<Vehicle> vehicles, PriorityQueue<PositionNode> locationsQue) {
+        //Isolate line
+        String line;
+        if(v.getType().equals("h")) {
+            int nPos = (int) Math.floor(pos/6);
+            line = mapString.substring(nPos * 6, (nPos + 1) * 6 - 1);
+        }
+        else {
+            //line = ???
+        }
+        //Iterate till collision, adding each valid space to queue
+        for(int i = 0; (i + xPos + length) < 6; i++) {
+            if (map[yPos][xPos + length + i].equals(" ")) {
+                System.out.println("X: " + (xPos + length + i) + " Y: " + yPos);
+            }
+            else {
+                break;
+            }
+        }
+        for(int i = 1; (xPos - i) > 0; i++) {
+            if (map[yPos][xPos - i].equals(" ")) {
+                System.out.println("X: " + (xPos - i - 1) + " Y: " + yPos);
+            }
+            else {
+                break;
+            }
+        }
+    }
+
     private static void parseInput(String[][] map, Vector<Vehicle> vehicles) {
         try{
             File file = new File("input.txt");
