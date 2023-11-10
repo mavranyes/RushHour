@@ -18,16 +18,16 @@ class RushHour {
             }
         }
         parseInput(map, vehicles);
-        printMap(map);
+        //printMap(map);
 
         //Adds to the hash map
         String currentPosition = convertMaptoString(map);
         //System.out.println(currentPosition);
         visitedPos.put(currentPosition, currentPosition);
-        //Checks if it contains this string
-        //System.out.println(visitedPos.containsKey(currentPosition));
-        locationsQue.add(new PositionNode(currentPosition, null, null));
-        //findMoves(vehicles.elementAt(4), 9, new PositionNode(currentPosition, null, null), vehicles, locationsQue, visitedPos);
+        
+        PositionNode firstParent = new PositionNode(currentPosition, null, "x");
+        findMoves(vehicles.elementAt(4), 9, firstParent, vehicles, locationsQue, visitedPos);
+        
         while(!locationsQue.isEmpty()) {
             PositionNode check = locationsQue.poll();
             String cStr = check.getPosition();
@@ -41,7 +41,7 @@ class RushHour {
                 printMoves(check);
                 return;
             }
-            findMoves(vehicles.elementAt(4), 9, check, vehicles, locationsQue, visitedPos);
+            //findMoves(vehicles.elementAt(4), 9, check, vehicles, locationsQue, visitedPos);
         }
     }
 
