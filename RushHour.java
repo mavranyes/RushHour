@@ -26,7 +26,7 @@ class RushHour {
         visitedPos.put(currentPosition, currentPosition);
         //Checks if it contains this string
         //System.out.println(visitedPos.containsKey(currentPosition));
-        findMoves(vehicles.elementAt(3), 24, currentPosition, vehicles, locationsQue);
+        findMoves(vehicles.elementAt(3), 24, new PositionNode(currentPosition, null, null), vehicles, locationsQue, visitedPos);
         while(!locationsQue.isEmpty()) {
             PositionNode check = locationsQue.poll();
             String cStr = check.getMove();
@@ -37,7 +37,6 @@ class RushHour {
         }
     }
 
-    private static void findMoves(Vehicle v, int pos, String mapString, Vector<Vehicle> vehicles, PriorityQueue<PositionNode> locationsQue) {
     private static void findMoves(Vehicle v, int pos, PositionNode parent, Vector<Vehicle> vehicles, 
                                   PriorityQueue<PositionNode> locationsQue, HashMap<String, String> visitedPos) {
         //Isolate line
@@ -48,14 +47,12 @@ class RushHour {
         int nPos;
         if(v.getDir().equals("h")) {
             nPos = (int) Math.floor(pos/6);
-            line = mapString.substring(nPos * 6, (nPos + 1) * 6);
             line = map.substring(nPos * 6, (nPos + 1) * 6);
             startPos = pos % 6;
         }
         else {
             nPos = pos % 6;
             for(int i = 0; i < 6; i++) {
-                line += mapString.charAt(nPos + (i * 6));
                 line += map.charAt(nPos + (i * 6));
             }
             startPos = (int) Math.floor(pos/6);
@@ -69,7 +66,7 @@ class RushHour {
                 System.out.println(move);
                 // Get modified position
                 for(int j = 0; j < length; j ++) {
-                    map
+                    //map
                 }
                 if(visitedPos.containsKey(map)) {
                     locationsQue.add(new PositionNode(map, parent, move));
@@ -151,17 +148,17 @@ class RushHour {
             if(currentPosition.charAt(i) != 'R'){
                 vindex = (int) currentPosition.charAt(i);
             }
-            findMoves(vehicles.get(vindex), pos, currentPosition, vehicles, q);
+            //findMoves(vehicles.get(vindex), pos, currentPosition, vehicles, q);
         }
     }
 
     
 
-    private static PositionNode printMoves(PositionNode node){
-        if(node.getParent() != null){
-            printMoves(node.getParent());
-        }
-        System.out.println(node.getMove());
-    }
+    // private static PositionNode printMoves(PositionNode node){
+    //     if(node.getParent() != null){
+    //         printMoves(node.getParent());
+    //     }
+    //     System.out.println(node.getMove());
+    // }
 
 }
