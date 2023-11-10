@@ -189,7 +189,7 @@ class RushHour {
     private static void findCars(PositionNode parent, Vector<Vehicle> vehicles, 
                                 PriorityQueue<PositionNode> locationsQue, HashMap<String, String> visitedPos){
         PriorityQueue<PositionNode> q = locationsQue;
-        String v = "";
+        String v = " ";
         String currentPosition = parent.getPosition();
         for(int i = 0; i < currentPosition.length(); i++){
             int pos = v.indexOf(currentPosition.charAt(i));
