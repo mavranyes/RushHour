@@ -6,30 +6,39 @@ import java.util.PriorityQueue;
 import java.util.Vector;
 import java.util.Comparator;
 
+/*
+ * Created to solve the Rush Hour board game
+ * in a minimum number of moves
+ */
 class RushHour {
     public static void main(String[] args) {
+        //Initalizes supporting data structures
         PriorityQueue<PositionNode> locationsQue = new PriorityQueue<PositionNode>(distComp);
         Vector<Vehicle> vehicles = new Vector<Vehicle>();
         HashMap<String, String> visitedPos = new HashMap<String, String>();
 
         String[][] map = new String[6][6];
-        for(int i = 0; i < 6; i++){
-            for(int j = 0; j < 6; j++){
+        for(int i = 0; i < 6; i++) {
+            for(int j = 0; j < 6; j++) {
                 map[i][j] = " ";
             }
         }
         parseInput(map, vehicles);
-        //printMap(map);
 
-        //Adds to the hash map
+        //Populate hash map
         String currentPosition = convertMaptoString(map);
         visitedPos.put(currentPosition, currentPosition);
         
+        //Popuate priority queue
         PositionNode firstParent = new PositionNode(currentPosition, null, "x");
         locationsQue.add(firstParent);
         
+        //Iterate through each possible position
+        //till solution is found or no moves are left
         while(!locationsQue.isEmpty()) {
             PositionNode check = locationsQue.poll();
+
+            //Check for a win
             String cStr = check.getPosition();
             if(cStr.charAt(17) == 'R'){
                 if(check.getDistance() == 1){
@@ -41,13 +50,24 @@ class RushHour {
                 printMoves(check);
                 return;
             }
+
+            //Find adjacent moves
             findCars(check, vehicles, locationsQue, visitedPos);
         }
     }
 
-    private static void findMoves(Vehicle v, int pos, PositionNode parent, Vector<Vehicle> vehicles, 
+    /**
+     * Finds the possible moves for the car provided
+     * and adds the valid ones to the priority queue
+     * @param v the vehicle object found
+     * @param pos the position of the vehicle
+     * @param parent the object from where this vehicle was found
+     * @param locationsQue the priority queue to store new states
+     * @param visitedPos the previously visted positions
+     */
+    private static void findMoves(Vehicle v, int pos, PositionNode parent, 
                                   PriorityQueue<PositionNode> locationsQue, HashMap<String, String> visitedPos) {
-        //Isolate line
+        //Isolate line for analysis of possible moves
         String map = parent.getPosition();
         String line = "";
         int startPos;
@@ -65,15 +85,20 @@ class RushHour {
             }
             startPos = (int) Math.floor(pos/6);
         }
-        //System.out.println(line);
+
         //Iterate till collision, adding each valid space to queue
+        //For down and to the right moves
         for(int i = startPos + length; i < 6; i++) {
             if (line.charAt(i) == ' ') {
                 int moveDis = i + 1 - (startPos + length);
+
+                //Select which direction it is moving
                 String dir = " D";
                 if(v.getDir().equals("h")) {
                     dir = " R";
                 }
+
+                //Perform move
                 String move = v.getColor() + " " + Integer.toString(moveDis) + dir;
                 String newMap[][] = string2map(map);
                 if(v.getDir().equals("h")) {
@@ -91,6 +116,8 @@ class RushHour {
                     }
                 }
                 String curPos = convertMaptoString(newMap);
+
+                //Check if move is valid
                 if(!visitedPos.containsKey(curPos)) {
                     visitedPos.put(curPos, curPos);
                     locationsQue.add(new PositionNode(curPos, parent, move));
@@ -100,13 +127,19 @@ class RushHour {
                 break;
             }
         }
+
+        //For up and to the left moves
         for(int i = startPos - 1; i >= 0; i--) {
             if (line.charAt(i) == ' ') {
                 int moveDis = startPos - i;
+
+                //Select which direction it is moving
                 String dir = " U";
                 if(v.getDir().equals("h")) {
                     dir = " L";
                 }
+
+                //Perform move
                 String move = v.getColor() + " " + Integer.toString(moveDis) + dir;
                 String newMap[][] = string2map(map);
                 if(v.getDir().equals("h")) {
@@ -128,6 +161,8 @@ class RushHour {
                     }
                 }
                 String curPos = convertMaptoString(newMap);
+
+                //Check if move is valid
                 if(!visitedPos.containsKey(curPos)) {
                     visitedPos.put(curPos, curPos);
                     locationsQue.add(new PositionNode(curPos, parent, move));
@@ -139,11 +174,19 @@ class RushHour {
         }
     }
 
+    /**
+     * The program is used during initalization to take in vehicle information,
+     * create vehicle objects, and populate the map
+     * @param map a 6 x 6 map to be populated
+     * @param vehicles the list of vehicles
+     */
     private static void parseInput(String[][] map, Vector<Vehicle> vehicles) {
         try{
             File file = new File("input4.txt");
             Scanner scan = new Scanner(file);
             int carCount = Integer.parseInt(scan.nextLine());
+
+            //Creates a vehicle object and adds it to the map
             for (int i = 0; i < carCount; i++) {
                 String type = scan.nextLine();
                 String color = scan.nextLine();
@@ -153,8 +196,6 @@ class RushHour {
                 String place = moreCars(i);
                 Vehicle v = new Vehicle(type, color, dir, xPos, yPos, place);
                 v.populateMap(map);
-                // printMap(map);
-                // v.findMoves(map);
                 vehicles.addElement(v);
             }
             scan.close();
@@ -164,6 +205,10 @@ class RushHour {
         }
     }
 
+    /**
+     * Prints the map in ascii art
+     * @param map the 6 x 6 map to be printed
+     */
     private static void printMap(String[][] map) {
         System.out.println("Rush Hour Current Representation: \n");
         System.out.println(" -------------");
@@ -176,6 +221,10 @@ class RushHour {
         }
     }
 
+    /**
+     * @param map the map to be converted into a string
+     * @return the two demensional map as a string
+     */
     private static String convertMaptoString(String[][] map) {
         String check = "";
         for(int i = 0; i < 6; i++){
@@ -186,7 +235,11 @@ class RushHour {
         return check;
     }
 
-    private static String[][] string2map(String map){
+    /**
+     * @param map the string map
+     * @return the string map as a two demensional array
+     */
+    private static String[][] string2map(String map) {
         String[][] array = new String[6][6];
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 6; j++){
@@ -195,9 +248,13 @@ class RushHour {
         }
         return array;
     }
-
-    /*
+     
+    /**
      * This method scans a string representation of the board and passes each vehicle+position to findNext
+     * @param parent the current position to be evaluated
+     * @param vehicles the list of all imported vehicles
+     * @param locationsQue the queue of locations to visit
+     * @param visitedPos the hash map of already visited locations
      */
     private static void findCars(PositionNode parent, Vector<Vehicle> vehicles, 
                                 PriorityQueue<PositionNode> locationsQue, HashMap<String, String> visitedPos){
@@ -213,29 +270,41 @@ class RushHour {
             if(currentPosition.charAt(i) != 'R'){
                 vindex = Character.getNumericValue(currentPosition.charAt(i));
             }
-            findMoves(vehicles.elementAt(vindex), i, parent, vehicles, locationsQue, visitedPos);
+            findMoves(vehicles.elementAt(vindex), i, parent, locationsQue, visitedPos);
         }
     }
 
-    private static Comparator<PositionNode> distComp = new Comparator<PositionNode>(){
+    /**
+     * Used to override the default priority list comparitor
+     */
+    private static Comparator<PositionNode> distComp = new Comparator<PositionNode>() {
         @Override
         public int compare(PositionNode one, PositionNode two){
             return Integer.compare(one.getDistance(), two.getDistance());
         }
     };
 
-    private static void printMoves(PositionNode node){
+    /**
+     * Recuresively prints the moves, starting from
+     * the root node
+     * @param node the ending node
+     */
+    private static void printMoves(PositionNode node) {
         if(node.getParent() != null){
             printMoves(node.getParent());
         }
         else {
             return;
         }
-        //printMap(string2map(node.getPosition()));
         System.out.println(node.getMove());
     }
 
-    private static String moreCars(int i){
+    /**
+     * Used to overcome a limitation of numbers
+     * @param i the int to be converted
+     * @return the corresponding int
+     */
+    private static String moreCars(int i) {
         String[] place = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
         return place[i];
     }

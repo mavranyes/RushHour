@@ -1,7 +1,3 @@
-import java.util.PriorityQueue;
-/**
- * vehicle
- */
 public class Vehicle {
     private String type;
     private String color;
@@ -11,6 +7,7 @@ public class Vehicle {
     private int length;
     private String place;
 
+    // A class used to hold information about vehicles
     public Vehicle(String type, String color, String dir, int xPos, int yPos, String place) {
         setType(type);
         setColor(color);
@@ -20,58 +17,19 @@ public class Vehicle {
         setPlace(place);
     }
 
-    //Populate map
+    /**
+     * Populates a map based on the vehicle information
+     * @param map the map where the vehicle will be added
+     */
     public void populateMap(String[][] map) {
-        //Probably add checks later on
         if(dir.equals("h")) {
             for(int i = 0; i < length; i++) {
-                //map[yPos][xPos + i] = String.valueOf(place);
                 map[yPos][xPos + i] = place;
             }
         }
         else {
             for(int i = 0; i < length; i++) {
-                //map[yPos + i][xPos] = String.valueOf(place);
                 map[yPos + i][xPos] = place;
-            }
-        }
-    }
-
-    public void findMoves(String[][] map, PriorityQueue<PositionNode> locationsQue) {
-        if(dir.equals("h")) {
-            for(int i = 0; (i + xPos + length) < 6; i++) {
-                if (map[yPos][xPos + length + i].equals(" ")) {
-                    System.out.println("X: " + (xPos + length + i) + " Y: " + yPos);
-                }
-                else {
-                    break;
-                }
-            }
-            for(int i = 1; (xPos - i) > 0; i++) {
-                if (map[yPos][xPos - i].equals(" ")) {
-                    System.out.println("X: " + (xPos - i - 1) + " Y: " + yPos);
-                }
-                else {
-                    break;
-                }
-            }
-        }
-        else {
-            for(int i = 0; (i + yPos + length) < 6; i++) {
-                if (map[yPos + length + i][xPos].equals(" ")) {
-                    System.out.println("X: " + xPos + " Y: " + (yPos + length + i));
-                }
-                else {
-                    break;
-                }
-            }
-            for(int i = 1; (yPos - i) > 0; i++) {
-                if (map[yPos - i][xPos].equals(" ")) {
-                    System.out.println("X: " + xPos + " Y: " + (yPos - i - 1));
-                }
-                else {
-                    break;
-                }
             }
         }
     }
@@ -137,8 +95,51 @@ public class Vehicle {
             this.place = "R";
         }
         else {
-            //this.place = String.valueOf(place);
             this.place = place;
         }
     }
 }
+//     /**
+//      * Finds the surrounding possible moves *UNUSED*
+//      * @param map
+//      * @param locationsQue
+//      */
+//     public void findMoves(String[][] map, PriorityQueue<PositionNode> locationsQue) {
+//         if(dir.equals("h")) {
+//             for(int i = 0; (i + xPos + length) < 6; i++) {
+//                 if (map[yPos][xPos + length + i].equals(" ")) {
+//                     System.out.println("X: " + (xPos + length + i) + " Y: " + yPos);
+//                 }
+//                 else {
+//                     break;
+//                 }
+//             }
+//             for(int i = 1; (xPos - i) > 0; i++) {
+//                 if (map[yPos][xPos - i].equals(" ")) {
+//                     System.out.println("X: " + (xPos - i - 1) + " Y: " + yPos);
+//                 }
+//                 else {
+//                     break;
+//                 }
+//             }
+//         }
+//         else {
+//             for(int i = 0; (i + yPos + length) < 6; i++) {
+//                 if (map[yPos + length + i][xPos].equals(" ")) {
+//                     System.out.println("X: " + xPos + " Y: " + (yPos + length + i));
+//                 }
+//                 else {
+//                     break;
+//                 }
+//             }
+//             for(int i = 1; (yPos - i) > 0; i++) {
+//                 if (map[yPos - i][xPos].equals(" ")) {
+//                     System.out.println("X: " + xPos + " Y: " + (yPos - i - 1));
+//                 }
+//                 else {
+//                     break;
+//                 }
+//             }
+//         }
+//     }
+// }
