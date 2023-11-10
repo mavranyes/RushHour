@@ -29,7 +29,7 @@ class RushHour {
         findMoves(vehicles.elementAt(1), 0, new PositionNode(currentPosition, null, null), vehicles, locationsQue, visitedPos);
         while(!locationsQue.isEmpty()) {
             PositionNode check = locationsQue.poll();
-            String cStr = check.getMove();
+            String cStr = check.getPosition();
             if(cStr.charAt(17) == 'R'){
                 if(check.getDistance() == 1){
                     System.out.println(check.getDistance() + " move:");
@@ -140,6 +140,16 @@ class RushHour {
             }
         }
         return check;
+    }
+
+    private static String[][] string2map(String map){
+        String[][] array = new String[6][6];
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 6; j++){
+                array[i][j] = String.valueOf(map.charAt((i*6) + j));
+            }
+        }
+        return array;
     }
 
     /*
