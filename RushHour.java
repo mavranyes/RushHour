@@ -26,7 +26,7 @@ class RushHour {
         visitedPos.put(currentPosition, currentPosition);
         //Checks if it contains this string
         //System.out.println(visitedPos.containsKey(currentPosition));
-        findMoves(vehicles.elementAt(3), 24, new PositionNode(currentPosition, null, null), vehicles, locationsQue, visitedPos);
+        findMoves(vehicles.elementAt(1), 0, new PositionNode(currentPosition, null, null), vehicles, locationsQue, visitedPos);
         while(!locationsQue.isEmpty()) {
             PositionNode check = locationsQue.poll();
             String cStr = check.getMove();
@@ -66,15 +66,20 @@ class RushHour {
         //Iterate till collision, adding each valid space to queue
         for(int i = startPos + length; i < 6; i++) {
             if (line.charAt(i) == ' ') {
-                System.out.println("pos:" + i);
-                String move = v.getColor() + " " + Integer.toString(i + 1 - (startPos + length)) + " R";
+                int moveDis = i + 1 - (startPos + length);
+                String move = v.getColor() + " " + Integer.toString(moveDis) + " R";
                 System.out.println(move);
                 // Get modified position
-                for(int j = 0; j < length; j ++) {
-                    //   map
-                }
-                if(visitedPos.containsKey(map)) {
-                    locationsQue.add(new PositionNode(map, parent, move));
+                // for(int j = 0; j < length; j ++) {
+                //     map.
+                // }
+                String A =    map.substring(0, startPos);
+                String B = map.substring(startPos, startPos + length);
+                String C = map.substring(startPos + length, startPos + length + moveDis);
+                String D = map.substring(startPos + length + moveDis, 36);
+                String newMap = A + C + B + D;
+                if(visitedPos.containsKey(newMap)) {
+                    locationsQue.add(new PositionNode(newMap, parent, move));
                 }
             }
             else {
@@ -159,11 +164,11 @@ class RushHour {
 
     
 
-    // private static PositionNode printMoves(PositionNode node){
-    //     if(node.getParent() != null){
-    //         printMoves(node.getParent());
-    //     }
-    //     System.out.println(node.getMove());
-    // }
+    private static void printMoves(PositionNode node){
+        if(node.getParent() != null){
+            printMoves(node.getParent());
+        }
+        System.out.println(node.getMove());
+    }
 
 }
