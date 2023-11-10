@@ -31,7 +31,12 @@ class RushHour {
             PositionNode check = locationsQue.poll();
             String cStr = check.getMove();
             if(cStr.charAt(17) == 'R'){
-                System.out.println(check.getDistance() + " moves:");
+                if(check.getDistance() == 1){
+                    System.out.println(check.getDistance() + " move:");
+                }
+                else{
+                    System.out.println(check.getDistance() + " moves:");
+                }
                 printMoves(check);
             }
         }
@@ -66,7 +71,7 @@ class RushHour {
                 System.out.println(move);
                 // Get modified position
                 for(int j = 0; j < length; j ++) {
-                    //map
+                    //   map
                 }
                 if(visitedPos.containsKey(map)) {
                     locationsQue.add(new PositionNode(map, parent, move));
