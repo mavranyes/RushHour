@@ -11,7 +11,7 @@ public class Vehicle {
     private int length;
     private String place;
 
-    public Vehicle(String type, String color, String dir, int xPos, int yPos, int place) {
+    public Vehicle(String type, String color, String dir, int xPos, int yPos, String place) {
         setType(type);
         setColor(color);
         setDir(dir);
@@ -25,12 +25,14 @@ public class Vehicle {
         //Probably add checks later on
         if(dir.equals("h")) {
             for(int i = 0; i < length; i++) {
-                map[yPos][xPos + i] = String.valueOf(place);
+                //map[yPos][xPos + i] = String.valueOf(place);
+                map[yPos][xPos + i] = place;
             }
         }
         else {
             for(int i = 0; i < length; i++) {
-                map[yPos + i][xPos] = String.valueOf(place);
+                //map[yPos + i][xPos] = String.valueOf(place);
+                map[yPos + i][xPos] = place;
             }
         }
     }
@@ -130,12 +132,13 @@ public class Vehicle {
         this.yPos = yPos;
     }
 
-    private void setPlace(int place) {
+    private void setPlace(String place) {
         if(color.equals("red")) {
             this.place = "R";
         }
         else {
-            this.place = String.valueOf(place);
+            //this.place = String.valueOf(place);
+            this.place = place;
         }
     }
 }
