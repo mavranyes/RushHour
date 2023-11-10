@@ -8,7 +8,9 @@ public class PositionNode {
         this.position = position;
         this.move = move;
         setParent(parentNode);
-        distance = parent.getDistance() + 1;
+        if(this.getParent() != null) {
+            distance = parent.getDistance() + 1;
+        }
     }
 
     //Getters
