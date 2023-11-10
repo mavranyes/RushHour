@@ -1,0 +1,11 @@
+while not empty
+    findcars 36 = O(c)
+        findMoves
+            convert 36 = O(c)    
+            for 6 = O(c)
+                for 6 = O(c)
+            for 6 = O(c)
+                for 6 = O(c)
+            convert 36 = O(c)
+            Hash O(c)
+            queue add
