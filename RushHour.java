@@ -26,7 +26,7 @@ class RushHour {
         visitedPos.put(currentPosition, currentPosition);
         //Checks if it contains this string
         //System.out.println(visitedPos.containsKey(currentPosition));
-        findMoves(vehicles.elementAt(1), 0, new PositionNode(currentPosition, null, null), vehicles, locationsQue, visitedPos);
+        findMoves(vehicles.elementAt(4), 9, new PositionNode(currentPosition, null, null), vehicles, locationsQue, visitedPos);
         while(!locationsQue.isEmpty()) {
             PositionNode check = locationsQue.poll();
             String cStr = check.getPosition();
@@ -69,30 +69,52 @@ class RushHour {
             if (line.charAt(i) == ' ') {
                 int moveDis = i + 1 - (startPos + length);
                 String move = v.getColor() + " " + Integer.toString(moveDis) + " R";
-                // String A = map.substring(0, startPos);
-                // String B = map.substring(startPos, startPos + length);
-                // String C = map.substring(startPos + length, startPos + length + moveDis);
-                // String D = map.substring(startPos + length + moveDis, 36);
-                // String newMap = A + C + B + D;
-                String new newMap[][] = 
-                for(int j = 0; j < moveDis; j++) {
-                    char swapChar = newMap[startPos + length + j][];
-
+                String newMap[][] = string2map(map);
+                if(v.getDir().equals("h")) {
+                    for(int j = 0; j < moveDis; j++) {
+                        String swapChar = newMap[nPos][startPos + length + j];
+                        newMap[nPos][startPos + length + j] = newMap[nPos][startPos + j];
+                        newMap[nPos][startPos + j] = swapChar;
+                    }
                 }
-
-                if(visitedPos.containsKey(newMap)) {
-                    locationsQue.add(new PositionNode(newMap, parent, move));
+                else {
+                    for(int j = 0; j < moveDis; j++) {
+                        String swapChar = newMap[startPos + length + j][nPos];
+                        newMap[startPos + length + j][nPos] = newMap[startPos + j][nPos];
+                        newMap[startPos + j][nPos] = swapChar;
+                    }
+                }
+                String curPos = convertMaptoString(newMap);
+                if(visitedPos.containsKey(curPos)) {
+                    locationsQue.add(new PositionNode(curPos, parent, move));
                 }
             }
             else {
                 break;
             }
         }
-        for(int i = startPos - 1; i > 0; i--) {
+        for(int i = startPos - 1; i >= 0; i--) {
             if (line.charAt(i) == ' ') {
-                
-                if(visitedPos.containsKey(newMap)) {
-                    locationsQue.add(new PositionNode(newMap, parent, move));
+                int moveDis = startPos - i;
+                String move = v.getColor() + " " + Integer.toString(moveDis) + " D";
+                String newMap[][] = string2map(map);
+                if(v.getDir().equals("h")) {
+                    for(int j = 0; j < moveDis; j++) {
+                        String swapChar = newMap[nPos][startPos + j - 1];
+                        newMap[nPos][startPos + j - 1] = newMap[nPos][startPos + length - 1 - j];
+                        newMap[nPos][startPos + length - 1 - j] = swapChar;
+                    }
+                }
+                else {
+                    for(int j = 0; j < moveDis; j++) {
+                        String swapChar = newMap[startPos + j - 1][nPos];
+                        newMap[startPos + j - 1][nPos] = newMap[startPos + length - 1 - j][nPos];
+                        newMap[startPos + length - 1 - j][nPos] = swapChar;
+                    }
+                }
+                String curPos = convertMaptoString(newMap);
+                if(visitedPos.containsKey(curPos)) {
+                    locationsQue.add(new PositionNode(curPos, parent, move));
                 }
             }
             else {
