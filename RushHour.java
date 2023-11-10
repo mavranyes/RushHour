@@ -199,7 +199,7 @@ class RushHour {
             //findMoves()
             int vindex = 0;
             if(currentPosition.charAt(i) != 'R'){
-                vindex = (int) currentPosition.charAt(i);
+                vindex = Character.getNumericValue(currentPosition.charAt(i));
                 v += currentPosition.charAt(i);
             }
             //findMoves(vehicles.get(vindex), pos, currentPosition, vehicles, q);
