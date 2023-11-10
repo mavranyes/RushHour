@@ -38,6 +38,7 @@ class RushHour {
                     System.out.println(check.getDistance() + " moves:");
                 }
                 printMoves(check);
+                return;
             }
         }
     }
@@ -68,16 +69,17 @@ class RushHour {
             if (line.charAt(i) == ' ') {
                 int moveDis = i + 1 - (startPos + length);
                 String move = v.getColor() + " " + Integer.toString(moveDis) + " R";
-                System.out.println(move);
-                // Get modified position
-                // for(int j = 0; j < length; j ++) {
-                //     map.
-                // }
-                String A =    map.substring(0, startPos);
-                String B = map.substring(startPos, startPos + length);
-                String C = map.substring(startPos + length, startPos + length + moveDis);
-                String D = map.substring(startPos + length + moveDis, 36);
-                String newMap = A + C + B + D;
+                // String A = map.substring(0, startPos);
+                // String B = map.substring(startPos, startPos + length);
+                // String C = map.substring(startPos + length, startPos + length + moveDis);
+                // String D = map.substring(startPos + length + moveDis, 36);
+                // String newMap = A + C + B + D;
+                String new newMap[][] = 
+                for(int j = 0; j < moveDis; j++) {
+                    char swapChar = newMap[startPos + length + j][];
+
+                }
+
                 if(visitedPos.containsKey(newMap)) {
                     locationsQue.add(new PositionNode(newMap, parent, move));
                 }
@@ -88,7 +90,10 @@ class RushHour {
         }
         for(int i = startPos - 1; i > 0; i--) {
             if (line.charAt(i) == ' ') {
-                System.out.println("pos:" + i);
+                
+                if(visitedPos.containsKey(newMap)) {
+                    locationsQue.add(new PositionNode(newMap, parent, move));
+                }
             }
             else {
                 break;
