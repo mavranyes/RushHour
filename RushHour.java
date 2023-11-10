@@ -91,6 +91,7 @@ class RushHour {
                 String curPos = convertMaptoString(newMap);
                 printMap(newMap);
                 if(!visitedPos.containsKey(curPos)) {
+                    visitedPos.put(curPos, curPos);
                     locationsQue.add(new PositionNode(curPos, parent, move));
                 }
             }
@@ -120,6 +121,7 @@ class RushHour {
                 String curPos = convertMaptoString(newMap);
                 printMap(newMap);
                 if(!visitedPos.containsKey(curPos)) {
+                    visitedPos.put(curPos, curPos);
                     locationsQue.add(new PositionNode(curPos, parent, move));
                 }
             }
