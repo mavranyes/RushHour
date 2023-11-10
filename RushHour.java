@@ -26,7 +26,8 @@ class RushHour {
         visitedPos.put(currentPosition, currentPosition);
         
         PositionNode firstParent = new PositionNode(currentPosition, null, "x");
-        findMoves(vehicles.elementAt(4), 9, firstParent, vehicles, locationsQue, visitedPos);
+        locationsQue.add(firstParent);
+        //findMoves(vehicles.elementAt(4), 9, firstParent, vehicles, locationsQue, visitedPos);
         
         while(!locationsQue.isEmpty()) {
             PositionNode check = locationsQue.poll();
@@ -41,7 +42,7 @@ class RushHour {
                 printMoves(check);
                 return;
             }
-            //findMoves(vehicles.elementAt(4), 9, check, vehicles, locationsQue, visitedPos);
+            findCars(check, vehicles, locationsQue, visitedPos);
         }
     }
 
@@ -87,7 +88,7 @@ class RushHour {
                     }
                 }
                 String curPos = convertMaptoString(newMap);
-                if(visitedPos.containsKey(curPos)) {
+                if(!visitedPos.containsKey(curPos)) {
                     locationsQue.add(new PositionNode(curPos, parent, move));
                 }
             }
@@ -115,7 +116,7 @@ class RushHour {
                     }
                 }
                 String curPos = convertMaptoString(newMap);
-                if(visitedPos.containsKey(curPos)) {
+                if(!visitedPos.containsKey(curPos)) {
                     locationsQue.add(new PositionNode(curPos, parent, move));
                 }
             }
@@ -184,9 +185,11 @@ class RushHour {
     /*
      * This method scans a string representation of the board and passes each vehicle+position to findNext
      */
-    private static void findCars(String currentPosition, Vector<Vehicle> vehicles, PriorityQueue<PositionNode> locationsQue){
+    private static void findCars(PositionNode parent, Vector<Vehicle> vehicles, 
+                                PriorityQueue<PositionNode> locationsQue, HashMap<String, String> visitedPos){
         PriorityQueue<PositionNode> q = locationsQue;
         String v = "";
+        String currentPosition = parent.getPosition();
         for(int i = 0; i < currentPosition.length(); i++){
             int pos = v.indexOf(currentPosition.charAt(i));
             if(pos == -1) { 
@@ -198,6 +201,7 @@ class RushHour {
                 vindex = (int) currentPosition.charAt(i);
             }
             //findMoves(vehicles.get(vindex), pos, currentPosition, vehicles, q);
+            findMoves(vehicles.elementAt(vindex), pos, parent, vehicles, locationsQue, visitedPos);
         }
     }
 
