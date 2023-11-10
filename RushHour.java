@@ -26,13 +26,18 @@ class RushHour {
         visitedPos.put(currentPosition, currentPosition);
         //Checks if it contains this string
         //System.out.println(visitedPos.containsKey(currentPosition));
-        findMoves(vehicles.elementAt(1), 0, new PositionNode(currentPosition, null, null), vehicles, locationsQue, visitedPos);
+        findMoves(vehicles.elementAt(3), 24, currentPosition, vehicles, locationsQue);
         while(!locationsQue.isEmpty()) {
-            locationsQue.poll();
+            PositionNode check = locationsQue.poll();
+            String cStr = check.getMove();
+            if(cStr.charAt(17) == 'R'){
+                System.out.println(check.getDistance() + " moves:");
+                printMoves(check);
+            }
         }
     }
 
-    private static void findMoves(Vehicle v, int pos, PositionNode parent, Vector<Vehicle> vehicles, PriorityQueue<PositionNode> locationsQue, HashMap<String, String> visitedPos) {
+    private static void findMoves(Vehicle v, int pos, String mapString, Vector<Vehicle> vehicles, PriorityQueue<PositionNode> locationsQue) {
         //Isolate line
         String line = "";
         int startPos;
@@ -40,13 +45,13 @@ class RushHour {
         int nPos;
         if(v.getDir().equals("h")) {
             nPos = (int) Math.floor(pos/6);
-            line = parent.getPosition().substring(nPos * 6, (nPos + 1) * 6);
+            line = mapString.substring(nPos * 6, (nPos + 1) * 6);
             startPos = pos % 6;
         }
         else {
             nPos = pos % 6;
             for(int i = 0; i < 6; i++) {
-                line += parent.getPosition().charAt(nPos + (i * 6));
+                line += mapString.charAt(nPos + (i * 6));
             }
             startPos = (int) Math.floor(pos/6);
         }
@@ -54,13 +59,7 @@ class RushHour {
         //Iterate till collision, adding each valid space to queue
         for(int i = startPos + length; i < 6; i++) {
             if (line.charAt(i) == ' ') {
-                String move = v.getColor() + " " + Integer.toString(i + 1 - (startPos + length)) + " R";
-                System.out.println(move);
-                // Get modified position
-                if(visitedPos.containsKey(newPos)) {
-                    //get move
-                    locationsQue.add(new PositionNode(newPos, parent, move));
-                }
+                System.out.println("pos:" + i);
             }
             else {
                 break;
@@ -138,8 +137,17 @@ class RushHour {
             if(currentPosition.charAt(i) != 'R'){
                 vindex = (int) currentPosition.charAt(i);
             }
-            //findMoves(vehicles.get(vindex), pos, currentPosition, vehicles, q);
+            findMoves(vehicles.get(vindex), pos, currentPosition, vehicles, q);
         }
+    }
+
+    
+
+    private static PositionNode printMoves(PositionNode node){
+        if(node.getParent() != null){
+            printMoves(node.getParent());
+        }
+        System.out.println(node.getMove());
     }
 
 }
