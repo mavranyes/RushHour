@@ -193,13 +193,14 @@ class RushHour {
         String currentPosition = parent.getPosition();
         for(int i = 0; i < currentPosition.length(); i++){
             int pos = v.indexOf(currentPosition.charAt(i));
-            if(pos == -1) { 
-                break; 
+            if(pos != -1) { 
+                continue; 
             }
             //findMoves()
             int vindex = 0;
             if(currentPosition.charAt(i) != 'R'){
                 vindex = (int) currentPosition.charAt(i);
+                v += currentPosition.charAt(i);
             }
             //findMoves(vehicles.get(vindex), pos, currentPosition, vehicles, q);
             findMoves(vehicles.elementAt(vindex), pos, parent, vehicles, locationsQue, visitedPos);
