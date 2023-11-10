@@ -105,6 +105,9 @@ class RushHour {
                 String newMap[][] = string2map(map);
                 if(v.getDir().equals("h")) {
                     for(int j = 0; j < moveDis; j++) {
+                        if(startPos + j - 1 == 6){
+                            int x = 1;
+                        }
                         String swapChar = newMap[nPos][startPos + j - 1];
                         newMap[nPos][startPos + j - 1] = newMap[nPos][startPos + length - 1 - j];
                         newMap[nPos][startPos + length - 1 - j] = swapChar;
