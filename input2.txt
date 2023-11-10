@@ -4,7 +4,7 @@ red
 h
 3
 3
-truck
+car
 lime
 v
 2
