@@ -41,4 +41,5 @@ public class PositionNode {
     public void setParent(PositionNode parent) {
         this.parent = parent;
     }
+
 }

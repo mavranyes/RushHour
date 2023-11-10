@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.Vector;
+import java.util.Comparator;
 
 class RushHour {
     public static void main(String[] args) {
@@ -205,7 +206,14 @@ class RushHour {
         }
     }
 
-    
+    Comparator<PositionNode> distComp = new Comparator<PositionNode>(){
+        @Override
+        public int compare(PositionNode one, PositionNode two){
+            return Integer.compare(one.getDistance(), two.getDistance());
+        }
+    };
+
+    PriorityQueue<PositionNode> q = new PriorityQueue<PositionNode>(distComp);
 
     private static void printMoves(PositionNode node){
         if(node.getParent() != null){
