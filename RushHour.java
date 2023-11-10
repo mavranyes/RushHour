@@ -26,7 +26,8 @@ class RushHour {
         visitedPos.put(currentPosition, currentPosition);
         //Checks if it contains this string
         //System.out.println(visitedPos.containsKey(currentPosition));
-        findMoves(vehicles.elementAt(4), 9, new PositionNode(currentPosition, null, null), vehicles, locationsQue, visitedPos);
+        locationsQue.add(new PositionNode(currentPosition, null, null));
+        //findMoves(vehicles.elementAt(4), 9, new PositionNode(currentPosition, null, null), vehicles, locationsQue, visitedPos);
         while(!locationsQue.isEmpty()) {
             PositionNode check = locationsQue.poll();
             String cStr = check.getPosition();
@@ -40,6 +41,7 @@ class RushHour {
                 printMoves(check);
                 return;
             }
+            findMoves(vehicles.elementAt(4), 9, check, vehicles, locationsQue, visitedPos);
         }
     }
 

@@ -11,6 +11,9 @@ public class PositionNode {
         if(this.getParent() != null) {
             distance = parent.getDistance() + 1;
         }
+        else {
+            distance = 0;
+        }
     }
 
     //Getters
