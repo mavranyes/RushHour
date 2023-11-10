@@ -1,0 +1,11 @@
+2
+car
+red
+h
+3
+3
+car
+lime
+v
+2
+5

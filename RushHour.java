@@ -118,8 +118,8 @@ class RushHour {
                 }
                 else {
                     for(int j = 0; j < moveDis; j++) {
-                        String swapChar = newMap[startPos + j - 1][nPos];
-                        newMap[startPos + j - 1][nPos] = newMap[startPos + length - 1 - j][nPos];
+                        String swapChar = newMap[startPos - j - 1][nPos];
+                        newMap[startPos - j - 1][nPos] = newMap[startPos + length - 1 - j][nPos];
                         newMap[startPos + length - 1 - j][nPos] = swapChar;
                     }
                 }
@@ -137,7 +137,7 @@ class RushHour {
 
     private static void parseInput(String[][] map, Vector<Vehicle> vehicles) {
         try{
-            File file = new File("input.txt");
+            File file = new File("input2.txt");
             Scanner scan = new Scanner(file);
             int carCount = Integer.parseInt(scan.nextLine());
             for (int i = 0; i < carCount; i++) {
