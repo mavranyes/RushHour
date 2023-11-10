@@ -203,7 +203,7 @@ class RushHour {
                 v += currentPosition.charAt(i);
             }
             //findMoves(vehicles.get(vindex), pos, currentPosition, vehicles, q);
-            findMoves(vehicles.elementAt(vindex), pos, parent, vehicles, locationsQue, visitedPos);
+            findMoves(vehicles.elementAt(vindex), i, parent, vehicles, locationsQue, visitedPos);
         }
     }
 
