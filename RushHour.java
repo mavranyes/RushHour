@@ -38,7 +38,10 @@ class RushHour {
     }
 
     private static void findMoves(Vehicle v, int pos, String mapString, Vector<Vehicle> vehicles, PriorityQueue<PositionNode> locationsQue) {
+    private static void findMoves(Vehicle v, int pos, PositionNode parent, Vector<Vehicle> vehicles, 
+                                  PriorityQueue<PositionNode> locationsQue, HashMap<String, String> visitedPos) {
         //Isolate line
+        String map = parent.getPosition();
         String line = "";
         int startPos;
         int length = v.getLength();
@@ -46,12 +49,14 @@ class RushHour {
         if(v.getDir().equals("h")) {
             nPos = (int) Math.floor(pos/6);
             line = mapString.substring(nPos * 6, (nPos + 1) * 6);
+            line = map.substring(nPos * 6, (nPos + 1) * 6);
             startPos = pos % 6;
         }
         else {
             nPos = pos % 6;
             for(int i = 0; i < 6; i++) {
                 line += mapString.charAt(nPos + (i * 6));
+                line += map.charAt(nPos + (i * 6));
             }
             startPos = (int) Math.floor(pos/6);
         }
@@ -60,6 +65,15 @@ class RushHour {
         for(int i = startPos + length; i < 6; i++) {
             if (line.charAt(i) == ' ') {
                 System.out.println("pos:" + i);
+                String move = v.getColor() + " " + Integer.toString(i + 1 - (startPos + length)) + " R";
+                System.out.println(move);
+                // Get modified position
+                for(int j = 0; j < length; j ++) {
+                    map
+                }
+                if(visitedPos.containsKey(map)) {
+                    locationsQue.add(new PositionNode(map, parent, move));
+                }
             }
             else {
                 break;
