@@ -19,16 +19,14 @@ class RushHour {
             }
         }
         parseInput(map, vehicles);
-        printMap(map);
+        //printMap(map);
 
         //Adds to the hash map
         String currentPosition = convertMaptoString(map);
-        //System.out.println(currentPosition);
         visitedPos.put(currentPosition, currentPosition);
         
         PositionNode firstParent = new PositionNode(currentPosition, null, "x");
         locationsQue.add(firstParent);
-        //findMoves(vehicles.elementAt(4), 9, firstParent, vehicles, locationsQue, visitedPos);
         
         while(!locationsQue.isEmpty()) {
             PositionNode check = locationsQue.poll();
@@ -72,7 +70,11 @@ class RushHour {
         for(int i = startPos + length; i < 6; i++) {
             if (line.charAt(i) == ' ') {
                 int moveDis = i + 1 - (startPos + length);
-                String move = v.getColor() + " " + Integer.toString(moveDis) + " R";
+                String dir = " D";
+                if(v.getDir().equals("h")) {
+                    dir = " R";
+                }
+                String move = v.getColor() + " " + Integer.toString(moveDis) + dir;
                 String newMap[][] = string2map(map);
                 if(v.getDir().equals("h")) {
                     for(int j = 0; j < moveDis; j++) {
@@ -89,7 +91,6 @@ class RushHour {
                     }
                 }
                 String curPos = convertMaptoString(newMap);
-                printMap(newMap);
                 if(!visitedPos.containsKey(curPos)) {
                     visitedPos.put(curPos, curPos);
                     locationsQue.add(new PositionNode(curPos, parent, move));
@@ -102,12 +103,16 @@ class RushHour {
         for(int i = startPos - 1; i >= 0; i--) {
             if (line.charAt(i) == ' ') {
                 int moveDis = startPos - i;
-                String move = v.getColor() + " " + Integer.toString(moveDis) + " D";
+                String dir = " U";
+                if(v.getDir().equals("h")) {
+                    dir = " L";
+                }
+                String move = v.getColor() + " " + Integer.toString(moveDis) + dir;
                 String newMap[][] = string2map(map);
                 if(v.getDir().equals("h")) {
                     for(int j = 0; j < moveDis; j++) {
-                        String swapChar = newMap[nPos][startPos + j - 1];
-                        newMap[nPos][startPos + j - 1] = newMap[nPos][startPos + length - 1 - j];
+                        String swapChar = newMap[nPos][startPos - j - 1];
+                        newMap[nPos][startPos - j - 1] = newMap[nPos][startPos + length - 1 - j];
                         newMap[nPos][startPos + length - 1 - j] = swapChar;
                     }
                 }
@@ -119,7 +124,6 @@ class RushHour {
                     }
                 }
                 String curPos = convertMaptoString(newMap);
-                printMap(newMap);
                 if(!visitedPos.containsKey(curPos)) {
                     visitedPos.put(curPos, curPos);
                     locationsQue.add(new PositionNode(curPos, parent, move));
@@ -192,7 +196,6 @@ class RushHour {
      */
     private static void findCars(PositionNode parent, Vector<Vehicle> vehicles, 
                                 PriorityQueue<PositionNode> locationsQue, HashMap<String, String> visitedPos){
-        PriorityQueue<PositionNode> q = locationsQue;
         String v = " ";
         String currentPosition = parent.getPosition();
         for(int i = 0; i < currentPosition.length(); i++){
@@ -200,13 +203,11 @@ class RushHour {
             if(pos != -1) { 
                 continue; 
             }
-            //findMoves()
+            v += currentPosition.charAt(i);
             int vindex = 0;
             if(currentPosition.charAt(i) != 'R'){
                 vindex = Character.getNumericValue(currentPosition.charAt(i));
-                v += currentPosition.charAt(i);
             }
-            //findMoves(vehicles.get(vindex), pos, currentPosition, vehicles, q);
             findMoves(vehicles.elementAt(vindex), i, parent, vehicles, locationsQue, visitedPos);
         }
     }
@@ -222,6 +223,10 @@ class RushHour {
         if(node.getParent() != null){
             printMoves(node.getParent());
         }
+        else {
+            return;
+        }
+        //printMap(string2map(node.getPosition()));
         System.out.println(node.getMove());
     }
 
